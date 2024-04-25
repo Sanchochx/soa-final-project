@@ -1,0 +1,76 @@
+INSERT INTO
+    parking_usta(
+        nombre_estudiante,
+        codigo_estudiante,
+        correo_estudiante,
+        telefono_estudiante,
+        modelo_carro,
+        placa_carro
+    )
+VALUES
+    (
+        'Juan Miguel Ramirez Mancilla',
+        '2331612',
+        'juan.ramirezm@usantoto.edu.co',
+        '3222376733',
+        'Alfa Romeo 4C Azul',
+        'MJO 765'
+    ),
+    (
+        'Felipe Lopez',
+        '2621652',
+        'felipe.lopez@usantoto.edu.co',
+        '3112137943',
+        'Audi A6 Negro',
+        'LAU 003'
+    ), 
+    (
+        'Juan Diego Camargo',
+        '2645697',
+        'diego.camargo@usantoto.edu.co',
+        '3204137563',
+        'Ferrari F12 Verde',
+        'VOD 420'
+    ),
+    (
+        'Duban Fernando Cuervo Martinez',
+        '2225492',
+        'duban.cuervom@usantoto.edu.co',
+        '3230537835',
+        'Twingo Rojo',
+        'GAY 230' 
+    ),
+('Juan Perez', '12345', 'juan@example.com', '1234567890', 'Toyota Camry', 'ABC123'),
+('María García', '23456', 'maria@example.com', '0987654321', 'Honda Civic', 'XYZ456'),
+('Pedro González', '34567', 'pedro@example.com', '1357924680', 'Ford Focus', 'DEF789'),
+('Luisa Martínez', '45678', 'luisa@example.com', '9876543210', 'Chevrolet Spark', 'GHI012'),
+('Ana Rodríguez', '56789', 'ana@example.com', '2468013579', 'Nissan Sentra', 'JKL345'),
+('Carlos Sánchez', '67890', 'carlos@example.com', '0123456789', 'Volkswagen Jetta', 'MNO678'),
+('Sofía López', '78901', 'sofia@example.com', '9876543210', 'Hyundai Elantra', 'PQR901'),
+('Diego Ramírez', '89012', 'diego@example.com', '1357924680', 'Mazda 3', 'STU234'),
+('Valentina Herrera', '90123', 'valentina@example.com', '9876543210', 'Kia Rio', 'VWX567'),
+('Javier Fernández', '01234', 'javier@example.com', '2468013579', 'Toyota Corolla', 'YZA890'),
+('Marta González', '12341', 'marta@example.com', '1234567890', 'Honda Accord', 'BCD123'),
+('José López', '23412', 'jose@example.com', '0987654321', 'Ford Mustang', 'EFG456'),
+('Lucía Pérez', '34123', 'lucia@example.com', '1357924680', 'Chevrolet Cruze', 'HIJ789'),
+('Andrés Sánchez', '41234', 'andres@example.com', '9876543210', 'Nissan Altima', 'KLM012'),
+('Laura Martínez', '12345', 'laura@example.com', '2468013579', 'Volkswagen Golf', 'NOP345'),
+('Mateo Rodríguez', '23456', 'mateo@example.com', '0123456789', 'Hyundai Sonata', 'QRS678'),
+('Juliana Sosa', '34567', 'juliana@example.com', '9876543210', 'Toyota Prius', 'TUV901'),
+('Camilo Gómez', '45678', 'camilo@example.com', '1357924680', 'Honda Fit', 'WXY234'),
+('Natalia Díaz', '56789', 'natalia@example.com', '9876543210', 'Ford Fusion', 'ZAB567'),
+('Esteban Torres', '67890', 'esteban@example.com', '2468013579', 'Chevrolet Malibu', 'CDE890'),
+('Sara Rojas', '78901', 'sara@example.com', '1234567890', 'Nissan Versa', 'FGH123'),
+('Daniel Vargas', '89012', 'daniel@example.com', '0987654321', 'Volkswagen Beetle', 'IJK456'),
+('Carolina Pardo', '90123', 'carolina@example.com', '1357924680', 'Toyota Highlander', 'LMN789'),
+('Andrea Castro', '01234', 'andrea@example.com', '9876543210', 'Honda HR-V', 'OPQ012'),
+('Alejandro Ríos', '12341', 'alejandro@example.com', '2468013579', 'Ford Escape', 'RST345'),
+('Gabriela Rivas', '23412', 'gabriela@example.com', '0123456789', 'Chevrolet Tahoe', 'UVW678'),
+('Fernando Gutiérrez', '34123', 'fernando@example.com', '9876543210', 'Nissan Rogue', 'XYZ901'),
+('Paula Medina', '41234', 'paula@example.com', '1357924680', 'Volkswagen Tiguan', 'ABC234'),
+('Manuel Silva', '12345', 'manuel@example.com', '2468013579', 'Toyota RAV4', 'BCD567'),
+('Valeria Mendoza', '23456', 'valeria@example.com', '0123456789', 'Honda Pilot', 'EFG890'),
+('Roberto Pérez', '34567', 'roberto@example.com', '9876543210', 'Ford Explorer', 'HIJ123'),
+('Cristina López', '45678', 'cristina@example.com', '1357924680', 'Chevrolet Suburban', 'KLM456'),
+('David Martínez', '56789', 'david@example.com', '9876543210', 'Nissan Pathfinder', 'NOP789');
+

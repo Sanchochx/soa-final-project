@@ -1,0 +1,104 @@
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+.navbar {
+    background-color: #10439F;
+    color: #fff; /* Color del texto */
+    padding: 20px 0; /* Espaciado interno superior e inferior */
+    font-family: Arial, sans-serif; /* Fuente del texto */
+}
+
+.navbar-container {
+    max-width: 1400px; /* Ancho máximo de la barra de navegación */
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-right: 40px; /* Aumenta el espacio entre elementos */
+}
+
+.nav-links li:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último elemento */
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: "Lucida Console", "Courier New", monospace;
+    transition: color 0.3s;
+    display: flex; /* Alinear verticalmente el texto */
+    align-items: center;
+}
+
+.nav-links li a:hover {
+    color: #0E46A3; /* Cambio de color al pasar el mouse */
+}
+
+.content {
+    text-align: center;
+    padding: 50px;
+    color: #333; /* Color del texto */
+}
+
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px; /* Ancho de la tarjeta */
+    margin-bottom: 20px; /* Espacio entre las cartas */
+}
+
+.card-header {
+    background-color: black;
+    color: #fff;
+    padding: 20px;
+}
+
+.card-header h3 {
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body p {
+    margin-bottom: 10px;
+}
+
+/* Agrega más estilos CSS según sea necesario */
