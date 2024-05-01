@@ -102,6 +102,10 @@ def delete_student_f(student_id):
     db.session.commit()
     return redirect(url_for('students'))
 
+@app.route("/documentacion_api/")
+def doc_api():
+    return render_template("api.html")
+
 # *-----------------POSTMAN -------------------*
 
 @app.route("/all_students")

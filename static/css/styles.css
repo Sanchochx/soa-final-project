@@ -184,6 +184,48 @@ text-align: center
   cursor: pointer;
 }
 
+.container-api body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container-api header, section, footer {
+  padding: 20px;
+}
+
+.container-api header {
+  background-color: #4793AF;
+  color: white;
+}
+
+.container-api h1 {
+  margin: 0;
+}
+
+.container-api section {
+  border-bottom: 1px solid #ccc;
+}
+
+.container-api a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.container-api a:hover {
+  text-decoration: underline;
+}
+
+.container-api p {
+  text-align: center;
+}
+
+footer {
+  background-color: #f8f9fa;
+  text-align: center;
+  font-size: 0.8em;
+}
+
 .footer {
   text-align: center;
   padding: 20px 0;
