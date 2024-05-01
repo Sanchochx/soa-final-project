@@ -114,9 +114,80 @@ text-align: center
   margin: 5px 0;
 }
 
+.info-icon{
+  bottom: 5px;
+  right: 25px;
+  width: 20px;
+  height: auto;
+  border-radius: 5px;
+
+}
+
+.edit-icon{
+  bottom: 5px;
+  right: 25px;
+  width: 40px;
+  height: auto;
+  border-radius: 5px;
+
+}
+
+.delete-icon{
+  bottom: 5px;
+  right: 25px;
+  width: 35px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.form-container {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-container label,
+.form-container input,
+.form-container select,
+.form-container textarea {
+  display: block;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-container label {
+  font-weight: bold;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container select,
+.form-container textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-container primary {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .footer {
   text-align: center;
   padding: 20px 0;
   background-color: #10439F;
   color: #fff;
 }
+

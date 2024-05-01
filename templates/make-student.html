@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% from "bootstrap5/form.html" import render_form %} {% block content %} {%
+include "header.html" %}
 
-</body>
-</html>
+{% if is_edit: %}
+<h1>Editar registro</h1>
+{% else: %}
+<h1>Nuevo registro</h1>
+{% endif %}
+
+<div class="form-container">
+    {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+</div>
+
+{% include "footer.html" %} {% endblock %}

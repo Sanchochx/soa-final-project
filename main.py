@@ -1,13 +1,17 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from random import random
+from flask import Flask, render_template, redirect, url_for, jsonify, request
+from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Boolean
-import random
+from sqlalchemy import Integer, String, Text
+from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
+from datetime import date
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+Bootstrap5(app)
 
 class Base(DeclarativeBase):
     pass
@@ -56,7 +60,7 @@ def show_student(student_id):
 def add_student():
     form = StudentForm()
     if form.validate_on_submit():
-        new_student = StudentForm(
+        new_student = ParkingUsta(
             nombre_estudiante=form.nombre_estudiante.data,
             codigo_estudiante=form.codigo_estudiante.data,
             correo_estudiante= form.correo_estudiante.data,
@@ -66,9 +70,37 @@ def add_student():
         )
         db.session.add(new_student)
         db.session.commit()
-        return redirect(url_for("all"))
+        return redirect(url_for("students"))
     return render_template("make-student.html", form=form)
 
+@app.route("/edit-student/<int:student_id>", methods=["GET", "POST"])
+def edit_student(student_id):
+    student = db.get_or_404(ParkingUsta, student_id)
+    edit_form = StudentForm(
+        nombre_estudiante=student.nombre_estudiante,
+        codigo_estudiante=student.codigo_estudiante,
+        correo_estudiante=student.correo_estudiante,
+        telefono_estudiante=student.telefono_estudiante,
+        modelo_carro=student.modelo_carro,
+        placa_carro=student.placa_carro
+    )
+    if edit_form.validate_on_submit():
+        student.nombre_estudiante = edit_form.nombre_estudiante.data
+        student.codigo_estudiante = edit_form.codigo_estudiante.data
+        student.correo_estudiante = edit_form.correo_estudiante.data
+        student.telefono_estudiante = edit_form.telefono_estudiante.data
+        student.modelo_carro = edit_form.modelo_carro.data
+        student.placa_carro = edit_form.placa_carro.data
+        db.session.commit()
+        return redirect(url_for("show_student", student_id=student.id))
+    return render_template("make-student.html", form=edit_form, is_edit=True)
+
+@app.route("/delete/<int:student_id>")
+def delete_student_f(student_id):
+    student_to_delete = db.get_or_404(ParkingUsta, student_id)
+    db.session.delete(student_to_delete)
+    db.session.commit()
+    return redirect(url_for('students'))
 
 # *-----------------POSTMAN -------------------*
 
@@ -96,6 +128,20 @@ def update_student_phone(phone_id):
         return jsonify(response={"success": "Satisfactoriamente actualizado el número de teléfono."}), 200
     else:
         return jsonify(error={"Not Found": "Lastimosamente un registro con ese id no fue encontrado en la base de datos."}), 404
+
+@app.route("/add_student", methods=["POST"])
+def new_student():
+    new_student = ParkingUsta(
+        nombre_estudiante=request.form.get("nombre_estudiante"),
+        codigo_estudiante=request.form.get("codigo_estudiante"),
+        correo_estudiante=request.form.get("correo_estudiante"),
+        telefono_estudiante=request.form.get("telefono_estudiante"),
+        modelo_carro=(request.form.get("modelo_carro")),
+        placa_carro=(request.form.get("placa_carro")),
+    )
+    db.session.add(new_student)
+    db.session.commit()
+    return jsonify(response={"success": "Satisfactoriamente agregado el nuevo estudiante."})
 
 @app.route("/report-closed/<int:registro_id>", methods=["DELETE"])
 def delete_student(student_id):

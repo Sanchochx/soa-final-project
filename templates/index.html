@@ -1,18 +1,22 @@
 {% include "header.html" %}
-
-    <div class="container">
     <h1>Estudiantes Registrados</h1>
+    <div class="container">
         {% for student in all_students %}
     <div class="student-list">
+<!--        <a href="{{ url_for('show_student', student_id=student.id) }}"> </a>-->
       <div class="student">
         <div class="student-info">
-            <p><strong> Nombre del estudiante:</strong> {{ student.nombre_estudiante }}</p>
+          <p><strong> Nombre del estudiante:</strong> {{ student.nombre_estudiante }}</p>
           <p><strong> Código del estudiante:</strong> {{ student.codigo_estudiante }}</p>
           <p><strong> Correo del estudiante:</strong> {{ student.correo_estudiante }}</p>
           <p><strong> Teléfono del estudiante:</strong> {{ student.telefono_estudiante }}</p>
           <p><strong> Modelo de carro del estudiante:</strong> {{ student.modelo_carro }}</p>
           <p><strong> Placa del carro del estudiante:</strong> {{ student.placa_carro }}</p>
+          <a href="{{ url_for('show_student', student_id=student.id) }}">
+              <img src="static/img/info-icon.png" alt="info-icon" class="info-icon">
+          </a>
         </div>
+
       </div>
         </div>
         {% endfor %}
