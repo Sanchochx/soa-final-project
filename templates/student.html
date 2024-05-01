@@ -1,0 +1,15 @@
+{% include "header.html" %}
+
+ <div class="container-student">
+    <h1>Perfil del Estudiante</h1>
+    <div class="only-student-info">
+      <h2>{{ student.nombre_estudiante }}</h2>
+      <p><strong>Código del estudiante:</strong> {{student.codigo_estudiante}}</p>
+      <p><strong>Correo del estudiante:</strong> {{ student.correo_estudiante }}</p>
+      <p><strong>Teléfono del estudiante:</strong> {{ student.telefono_estudiante }}</p>
+      <p><strong> Modelo de carro del estudiante:</strong> {{ student.modelo_carro }}</p>
+      <p><strong> Placa del carro del estudiante:</strong> {{ student.placa_carro }}</p>
+    </div>
+  </div>
+
+{% include "footer.html" %}

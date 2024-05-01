@@ -1,35 +1,30 @@
-/* Resetting default margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: Arial, sans-serif;
-    background-size: cover;
-    background-position: center;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
 }
 
+h1{
+text-align: center
+}
 
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: auto;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
 }
 
 
 .navbar {
     background-color: #10439F;
-    color: #fff; /* Color del texto */
-    padding: 20px 0; /* Espaciado interno superior e inferior */
-    font-family: Arial, sans-serif; /* Fuente del texto */
+    color: #fff;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
 }
 
 .navbar-container {
-    max-width: 1400px; /* Ancho máximo de la barra de navegación */
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
@@ -56,49 +51,72 @@ body {
 .nav-links li a {
     text-decoration: none;
     color: #fff;
-    font-size: 16px; /* Tamaño de fuente */
+    font-size: 16px;
     font-weight: "Lucida Console", "Courier New", monospace;
     transition: color 0.3s;
-    display: flex; /* Alinear verticalmente el texto */
+    display: flex;
     align-items: center;
 }
 
 .nav-links li a:hover {
-    color: #0E46A3; /* Cambio de color al pasar el mouse */
+    color: #0E46A3;
 }
 
 .content {
     text-align: center;
     padding: 50px;
-    color: #333; /* Color del texto */
+    color: #333;
 }
 
-
-.card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 300px; /* Ancho de la tarjeta */
-    margin-bottom: 20px; /* Espacio entre las cartas */
+.student-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 20px;
 }
 
-.card-header {
-    background-color: black;
-    color: #fff;
-    padding: 20px;
+.student {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
 }
 
-.card-header h3 {
-    margin: 0;
+.student-info {
+  text-align: left;
 }
 
-.card-body {
-    padding: 20px;
+.student-info h2 {
+  margin-top: 0;
 }
 
-.card-body p {
-    margin-bottom: 10px;
+.student-info p {
+  margin: 5px 0;
 }
 
-/* Agrega más estilos CSS según sea necesario */
+.container-student {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.only-student-info {
+  text-align: left;
+}
+
+.only-student-info h2 {
+  margin-top: 0;
+}
+
+.only-student-info p {
+  margin: 5px 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #10439F;
+  color: #fff;
+}

@@ -1,8 +1,11 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
 import random
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
 app = Flask(__name__)
 
@@ -29,63 +32,78 @@ class ParkingUsta(db.Model):
 with app.app_context():
     db.create_all()
 
+class StudentForm(FlaskForm):
+    nombre_estudiante = StringField("Ingrese el nombre del estudiante.", validators=[DataRequired()])
+    codigo_estudiante = StringField("Ingrese el código del estudiante.", validators=[DataRequired()])
+    correo_estudiante = StringField("Ingrese el correo del estudiante.", validators=[DataRequired()])
+    telefono_estudiante = StringField("Ingrese el teléfono del estudiante.", validators=[DataRequired()])
+    modelo_carro = StringField("Ingrese el modelo de carro del estudiante.", validators=[DataRequired()])
+    placa_carro= StringField("Ingrese la placa del carro correspondiente.", validators=[DataRequired()])
+    submit = SubmitField("Ingresar registro.")
+
 @app.route('/')
-def data():
+def students():
     result = db.session.execute(db.select(ParkingUsta))
-    data = result.scalars().all()
-    return render_template("index.html", all_data=data)
+    student = result.scalars().all()
+    return render_template("index.html", all_students=student)
 
-@app.route("/data/<int:data_id>")
-def show_data_by_id(data_id):
-    requested_data = db.get_or_404(ParkingUsta, data_id)
-    return render_template("data.html", data=requested_data)
+@app.route("/student/<int:student_id>")
+def show_student(student_id):
+    requested_student = db.get_or_404(ParkingUsta, student_id)
+    return render_template("student.html", student=requested_student)
 
-@app.route("/obtener_registro")
-def registro_aleatorio():
-    result = db.session.execute(db.select(ParkingUsta))
-    all_data = result.scalars().all()
-    registro_aleatorio = random.choice(all_data)
-    return jsonify(registro=registro_aleatorio.to_dict())
+@app.route("/new-student", methods=["GET", "POST"])
+def add_student():
+    form = StudentForm()
+    if form.validate_on_submit():
+        new_student = StudentForm(
+            nombre_estudiante=form.nombre_estudiante.data,
+            codigo_estudiante=form.codigo_estudiante.data,
+            correo_estudiante= form.correo_estudiante.data,
+            telefono_estudiante=form.telefono_estudiante.data,
+            modelo_carro= form.modelo_carro.data,
+            placa_carro=form.placa_carro.data
+        )
+        db.session.add(new_student)
+        db.session.commit()
+        return redirect(url_for("all"))
+    return render_template("make-student.html", form=form)
 
-@app.route("/todos_los_registros")
-def todos_los_registros():
+
+# *-----------------POSTMAN -------------------*
+
+@app.route("/all_students")
+def all():
     result = db.session.execute(db.select(ParkingUsta).order_by(ParkingUsta.nombre_estudiante))
     all_data = result.scalars().all()
     return jsonify(registro=[registro.to_dict() for registro in all_data])
 
-@app.route("/anadir", methods=["POST"])
-def anadir_registro():
-    nuevo_registro = ParkingUsta(
-        nombre_estudiante=request.form.get("nombre_estudiante"),
-        codigo_estudiante=request.form.get("codigo_estudiante"),
-        correo_estudiante=request.form.get("correo_estudiante"),
-        telefono_estudiante=request.form.get("telefono_estudiante"),
-        modelo_carro=request.form.get("modelo_carro"),
-        placa_carro=request.form.get("placa_carro"),
-    )
-    db.session.add(nuevo_registro)
-    db.session.commit()
-    return jsonify(response={"success": "Registro nuevo agregado satisfactoriamente."})
+@app.route("/student")
+def student():
+    result = db.session.execute(db.select(ParkingUsta))
+    all_data = result.scalars().all()
+    random_student = random.choice(all_data)
+    return jsonify(registro=random_student.to_dict())
 
 
-@app.route("/actualizar-telefono/<int:telefono_id>", methods=["PATCH"])
-def actualizar_registro_telefono(telefono_id):
-    nuevo_telefono = request.args.get("nuevo_telefono")
-    registro = db.get_or_404(ParkingUsta, telefono_id)
-    if registro:
-        registro.telefono_estudiante = nuevo_telefono
+@app.route("/update_phone/<int:phone_id>", methods=["PATCH"])
+def update_student_phone(phone_id):
+    new_phone = request.args.get("new_phone")
+    data_phone = db.get_or_404(ParkingUsta, phone_id)
+    if data_phone:
+        data_phone.telefono_estudiante = new_phone
         db.session.commit()
         return jsonify(response={"success": "Satisfactoriamente actualizado el número de teléfono."}), 200
     else:
         return jsonify(error={"Not Found": "Lastimosamente un registro con ese id no fue encontrado en la base de datos."}), 404
 
 @app.route("/report-closed/<int:registro_id>", methods=["DELETE"])
-def borrar_registro(registro_id):
+def delete_student(student_id):
     api_key = request.args.get("api-key")
     if api_key == "TopSecretAPIKey":
-        registro = db.get_or_404(ParkingUsta, registro_id)
-        if registro:
-            db.session.delete(registro)
+        student = db.get_or_404(ParkingUsta, student_id)
+        if student:
+            db.session.delete(student)
             db.session.commit()
             return jsonify(response={"success": "Registro eliminado satisfactoriamente."}), 200
         else:

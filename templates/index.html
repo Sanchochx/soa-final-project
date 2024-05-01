@@ -1,41 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Information</title>
-    <link rel="stylesheet" href="static/css/styles.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-container">
-            <ul class="nav-links">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Registrar estudiante</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
+{% include "header.html" %}
 
-    <div class="content">
-        <h2>Estudiantes registrados:</h2>
-        {% for data in all_data %}
-        <div class="card-container">
-            <div class="card">
-                 <div class="card-header">
-                 <h3>Información Estudiante</h3>
-                 </div>
-                <div class="card-body">
-                <p><strong>Nombre estudiante:</strong> <br> {{ data.nombre_estudiante }}</p>
-                <p><strong>Código estudiante:</strong> {{ data.codigo_estudiante }}</p>
-                <p><strong>Correo estudiante:</strong> <br>  {{ data.correo_estudiante }}</p>
-                <p><strong>Teléfono estudiante:</strong> <br> {{ data.telefono_estudiante }}</p>
-                <p><strong>Modelo de carro:</strong> <br>  {{ data.modelo_carro }}</p>
-                <p><strong>Placa de carro:</strong>  {{ data.placa_carro }}</p>
-            </div>
+    <div class="container">
+    <h1>Estudiantes Registrados</h1>
+        {% for student in all_students %}
+    <div class="student-list">
+      <div class="student">
+        <div class="student-info">
+            <p><strong> Nombre del estudiante:</strong> {{ student.nombre_estudiante }}</p>
+          <p><strong> Código del estudiante:</strong> {{ student.codigo_estudiante }}</p>
+          <p><strong> Correo del estudiante:</strong> {{ student.correo_estudiante }}</p>
+          <p><strong> Teléfono del estudiante:</strong> {{ student.telefono_estudiante }}</p>
+          <p><strong> Modelo de carro del estudiante:</strong> {{ student.modelo_carro }}</p>
+          <p><strong> Placa del carro del estudiante:</strong> {{ student.placa_carro }}</p>
         </div>
+      </div>
+        </div>
+        {% endfor %}
     </div>
-       {% endfor %}
-    </div>
-</body>
-</html>
+
+{% include "footer.html" %}
