@@ -8,7 +8,6 @@ include "header.html" %}
 {% endif %}
 
 <div class="form-container">
-    {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+   {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
 </div>
-
 {% include "footer.html" %} {% endblock %}

@@ -1,11 +1,12 @@
 from random import random
-from flask import Flask, render_template, redirect, url_for, jsonify, request
+from flask import Flask, render_template, redirect, url_for, jsonify, request, flash
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Text
+from sqlalchemy import Integer, String
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+
+from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
@@ -14,6 +15,9 @@ Bootstrap5(app)
 
 class Base(DeclarativeBase):
     pass
+
+#-------STUDENTS DATABASE---------#
+app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///parking-usta.db'
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
@@ -31,17 +35,16 @@ class ParkingUsta(db.Model):
     def to_dict(self):
         return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
-
 with app.app_context():
     db.create_all()
 
 class StudentForm(FlaskForm):
-    nombre_estudiante = StringField("Ingrese el nombre del estudiante.", validators=[DataRequired()])
-    codigo_estudiante = StringField("Ingrese el código del estudiante.", validators=[DataRequired()])
-    correo_estudiante = StringField("Ingrese el correo del estudiante.", validators=[DataRequired()])
-    telefono_estudiante = StringField("Ingrese el teléfono del estudiante.", validators=[DataRequired()])
-    modelo_carro = StringField("Ingrese el modelo de carro del estudiante.", validators=[DataRequired()])
-    placa_carro= StringField("Ingrese la placa del carro correspondiente.", validators=[DataRequired()])
+    nombre_estudiante = StringField("Ingrese el nombre del estudiante:", validators=[DataRequired()])
+    codigo_estudiante = StringField("Ingrese el código del estudiante:", validators=[DataRequired()])
+    correo_estudiante = StringField("Ingrese el correo del estudiante:", validators=[DataRequired()])
+    telefono_estudiante = StringField("Ingrese el teléfono del estudiante:", validators=[DataRequired()])
+    modelo_carro = StringField("Ingrese el modelo de carro del estudiante:", validators=[DataRequired()])
+    placa_carro= StringField("Ingrese la placa del carro correspondiente:", validators=[DataRequired()])
     submit = SubmitField("Ingresar registro.")
 
 @app.route('/')
