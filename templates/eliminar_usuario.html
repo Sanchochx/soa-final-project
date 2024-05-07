@@ -1,0 +1,8 @@
+{% include "header.html" %}
+    <h2>Eliminar Usuario</h2>
+    <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+    <form method="POST">
+        <input type="submit" value="Eliminar">
+        <a href="{{ url_for('menu_principal') }}">Cancelar</a>
+    </form>
+{% include "footer.html" %}

@@ -1,17 +1,31 @@
 from random import random
-from flask import Flask, render_template, redirect, url_for, jsonify, request, flash
-from flask_bootstrap import Bootstrap5
+from flask import Flask, render_template, redirect, url_for, jsonify, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_session import Session
+from flask_bootstrap import Bootstrap5
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
 from flask_wtf import FlaskForm
+from flask_session import Session
+from werkzeug.security import generate_password_hash, check_password_hash
+import mysql.connector
 
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = True
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 Bootstrap5(app)
+Session(app)
+
+db_config = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': '',
+    'database': 'sql_inyeccion_db'
+}
 
 class Base(DeclarativeBase):
     pass
@@ -47,7 +61,195 @@ class StudentForm(FlaskForm):
     placa_carro= StringField("Ingrese la placa del carro correspondiente:", validators=[DataRequired()])
     submit = SubmitField("Ingresar registro.")
 
-@app.route('/')
+def autenticar_usuario(username, password):
+    try:
+        conexion = mysql.connector.connect(**db_config)
+        cursor = conexion.cursor()
+        consulta = "SELECT * FROM usuarios WHERE username = %s"
+        cursor.execute(consulta, (username,))
+        usuario = cursor.fetchone()
+
+        if usuario and check_password_hash(usuario[2], password):
+            return True
+        else:
+            return False
+
+    except mysql.connector.Error as error:
+        print(f"Error al conectarse a la base de datos: {error}")
+        return False
+
+def crear_usuario_db(username, password):
+    try:
+        conexion = mysql.connector.connect(**db_config)
+        cursor = conexion.cursor()
+        consulta = "SELECT * FROM usuarios WHERE username = %s"
+        cursor.execute(consulta, (username,))
+        resultado = cursor.fetchone()
+
+        if resultado:
+            flash("El nombre de usuario ya existe. Elija otro.", "danger")
+            conexion.close()
+            return False
+
+        hashed_password = generate_password_hash(password, method='scrypt')
+        consulta = "INSERT INTO usuarios (username, password) VALUES (%s, %s)"
+        cursor.execute(consulta, (username, hashed_password))
+
+        conexion.commit()
+        conexion.close()
+
+        return True
+
+    except mysql.connector.Error as error:
+        print(f"Error al crear el usuario: {error}")
+        return False
+
+def obtener_usuarios():
+    try:
+        conexion = mysql.connector.connect(**db_config)
+        cursor = conexion.cursor()
+        consulta = "SELECT id, username FROM usuarios"
+        cursor.execute(consulta)
+        usuarios = cursor.fetchall()
+        conexion.close()
+        return usuarios
+
+    except mysql.connector.Error as error:
+        print(f"Error al obtener la lista de usuarios: {error}")
+        return []
+
+def eliminar_usuario_db(usuario_id):
+    try:
+        conexion = mysql.connector.connect(**db_config)
+        cursor = conexion.cursor()
+
+        # Verificar si el usuario que se va a eliminar es el mismo que está en sesión
+        usuario_en_sesion = obtener_usuario_por_username(session['username'])
+        if usuario_en_sesion and usuario_en_sesion[0] == usuario_id:
+            flash("No puedes eliminar tu propia cuenta mientras estás en sesión", "warning")
+            return False
+
+        consulta = "DELETE FROM usuarios WHERE id = %s"
+        cursor.execute(consulta, (usuario_id,))
+        conexion.commit()
+        conexion.close()
+        return True
+
+    except mysql.connector.Error as error:
+        print(f"Error al eliminar el usuario: {error}")
+        return False
+
+
+def obtener_usuario_por_id(usuario_id):
+    try:
+        conexion = mysql.connector.connect(**db_config)
+        cursor = conexion.cursor()
+        consulta = "SELECT * FROM usuarios WHERE id = %s"
+        cursor.execute(consulta, (usuario_id,))
+        usuario = cursor.fetchone()
+        conexion.close()
+        return usuario
+
+    except mysql.connector.Error as error:
+        print(f"Error al obtener el usuario por ID: {error}")
+        return None
+
+
+def obtener_usuario_por_username(username):
+    try:
+        conexion = mysql.connector.connect(**db_config)
+        cursor = conexion.cursor()
+        consulta = "SELECT * FROM usuarios WHERE username = %s"
+        cursor.execute(consulta, (username,))
+        usuario = cursor.fetchone()
+        conexion.close()
+        return usuario
+
+    except mysql.connector.Error as error:
+        print(f"Error al obtener el usuario por nombre de usuario: {error}")
+        return None
+
+
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if autenticar_usuario(username, password):
+            session['username'] = username
+            flash("Inicio de sesión exitoso", "success")
+            return redirect(url_for('students'))
+        else:
+            flash("Autenticación fallida", "danger")
+
+    return render_template('login.html')
+
+@app.route('/registrarse', methods=['GET', 'POST'])
+def registrarse():
+    if request.method == 'POST':
+        nuevo_username = request.form['nuevo_username']
+        nuevo_password = request.form['nuevo_password']
+
+        if crear_usuario_db(nuevo_username, nuevo_password):
+            flash("Usuario creado con éxito", "success")
+            return redirect(url_for('login'))
+        else:
+            flash("Error al crear el usuario", "danger")
+
+    return render_template('registrarse.html')
+
+@app.route('/menu_principal')
+def menu_principal():
+    if 'username' in session:
+        usuarios = obtener_usuarios()
+        # Aquí obtienes la información del usuario específico que deseas mostrar
+        usuario = obtener_usuario_por_username(session['username'])
+        return render_template('menu_principal.html', username=session['username'], usuario=usuario, usuarios=usuarios)
+    else:
+        flash("Debes iniciar sesión primero", "warning")
+        return redirect(url_for('login'))
+
+
+@app.route('/cerrar_sesion')
+def cerrar_sesion():
+    session.pop('username', None)
+    flash("Sesión cerrada", "info")
+    return redirect(url_for('login'))
+
+@app.route('/crear_usuario', methods=['GET', 'POST'])
+def crear_usuario():
+    if 'username' not in session:
+        flash("Debes iniciar sesión primero", "warning")
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        nuevo_username = request.form['nuevo_username']
+        nuevo_password = request.form['nuevo_password']
+
+        if crear_usuario_db(nuevo_username, nuevo_password):
+            flash("Usuario creado con éxito", "success")
+            return redirect(url_for('menu_principal'))
+        else:
+            flash("Error al crear el usuario", "danger")
+
+    return render_template('crear_usuario.html')
+
+@app.route('/eliminar_usuario/<int:usuario_id>', methods=['GET', 'POST'])
+def eliminar_usuario(usuario_id):
+    if 'username' not in session:
+        flash("Debes iniciar sesión primero", "warning")
+        return redirect(url_for('login'))
+
+    if eliminar_usuario_db(usuario_id):
+        flash("Usuario eliminado con éxito", "success")
+    else:
+        flash("Error al eliminar el usuario", "danger")
+
+    return redirect(url_for('menu_principal'))
+
+@app.route('/students')
 def students():
     result = db.session.execute(db.select(ParkingUsta))
     student = result.scalars().all()
@@ -164,4 +366,4 @@ def delete_student(student_id):
         return jsonify(error={"Forbidden": "Lo lamento, eso no es permitido. Verifica haber ingresado la api_key correcta."}), 403
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8001)

@@ -1,0 +1,47 @@
+{% include "header.html" %}
+    <div class="container">
+        <h2 class="nojoda">Bienvenido {{ username }}</h2>
+        <h3>Lista de Usuarios</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario[0] }}</td>
+                    <td>{{ usuario[1] }}</td>
+                    <td>
+                         <!-- Botón para eliminar -->
+                        <button onclick="confirmarEliminacion({{ usuario[0] }})" class="delete-btn">Eliminar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="buttons">
+            <a href="{{ url_for('crear_usuario') }}" class="btn">Crear Nuevo Usuario</a>
+            <a href="{{ url_for('cerrar_sesion') }}" class="btn">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación de eliminación -->
+    <div id="confirmarEliminacionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">&times;</span>
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+            <form class="eliminarUsuarioForm" id="eliminarUsuarioForm" method="POST">
+                <input type="submit" value="Eliminar">
+                <br>
+                <br>
+                <button class="boton-cancelar" type="button" onclick="cerrarModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+{% include "footer.html" %}

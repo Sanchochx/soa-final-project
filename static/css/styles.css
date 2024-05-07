@@ -13,6 +13,7 @@ text-align: center
   max-width: 800px;
   margin: 20px auto;
   padding: 0 20px;
+  margin-bottom: 229px;
 }
 
 
@@ -24,7 +25,7 @@ text-align: center
 }
 
 .navbar-container {
-    max-width: 1400px;
+    max-width: 1800px;
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
@@ -58,9 +59,6 @@ text-align: center
     align-items: center;
 }
 
-.nav-links li a:hover {
-    color: #0E46A3;
-}
 
 .content {
     text-align: center;
@@ -220,21 +218,24 @@ text-align: center
   text-align: center;
 }
 
-.form-container: custom-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+.custom-submit-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    height: 40px;
 }
 
-.custom-button:hover {
-  background-color: #45a049; /* Darker Green */
+.custom-submit-button:hover {
+  background-color: #45a049;
 }
 
 footer {
@@ -250,3 +251,192 @@ footer {
   color: #fff;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    background-color: white;
+}
+
+th {
+    background-color: #0E46A3;
+    color: white;
+}
+
+.nojoda{
+    margin-left: 200px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #10439F;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #7EA1FF;
+}
+
+.delete-btn {
+    background-color: #10439F; /* Mismo color que los otros botones */
+    color: white; /* Texto blanco */
+    padding: 10px 20px; /* Mismo padding que los otros botones */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Mismo radio de borde que los otros botones */
+    cursor: pointer; /* Cursor */
+}
+
+.delete-btn:hover {
+    background-color: #7EA1FF; /* Cambio de color al pasar el cursor */
+}
+
+.buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h3 {
+    text-align: center;
+}
+
+.modal {
+    display: none; /* Ocultar el modal de forma predeterminada */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.user-create-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Color de fondo */
+}
+
+.user-create-container: h2 {
+    text-align: center;
+    color: #333333; /* Color del texto */
+}
+
+.user-create-container: form {
+    width: 100%;
+}
+
+.user-create-container :label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555555; /* Color del texto */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px); /* Ancho reducido */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #cccccc; /* Color del borde */
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-left: 10px; /* Centrado horizontal */
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #10439F; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #1679AB; /* Color de fondo al pasar el cursor */
+}
+
+/* Estilos para los enlaces */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+p a {
+    color: #074173; /* Color del enlace */
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+    color: #1679AB; /* Color del enlace al pasar el cursor */
+}
+
+.boton-cancelar{
+    width: 100%;
+    background-color: #10439F; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton-cancelar:hover{
+    background-color: #1679AB;
+}
+
+.boton-cerrar-sesion{
+    margin-left: 490px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
+    transition: color 0.3s;
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #ff0000; /* Red background color, change as needed */
+    border: none;
+    border-radius: 2px;
+}
