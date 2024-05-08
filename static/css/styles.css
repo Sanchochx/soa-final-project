@@ -18,7 +18,7 @@ text-align: center
 
 
 .navbar {
-    background-color: #10439F;
+    background-color: #172e7c;
     color: #fff;
     padding: 20px 0;
     font-family: Arial, sans-serif;
@@ -42,11 +42,12 @@ text-align: center
 }
 
 .nav-links li {
-    margin-right: 40px; /* Aumenta el espacio entre elementos */
+    margin-right: 40px;
+    margin-left: 25px;
 }
 
 .nav-links li:last-child {
-    margin-right: 0; /* Elimina el margen derecho del último elemento */
+    margin-right: 0;
 }
 
 .nav-links li a {
@@ -57,6 +58,7 @@ text-align: center
     transition: color 0.3s;
     display: flex;
     align-items: center;
+    margin-top: 25px;
 }
 
 
@@ -287,7 +289,7 @@ th {
 }
 
 .btn:hover {
-    background-color: #7EA1FF;
+    background-color: #1679AB   ;
 }
 
 .delete-btn {
@@ -300,7 +302,7 @@ th {
 }
 
 .delete-btn:hover {
-    background-color: #7EA1FF; /* Cambio de color al pasar el cursor */
+    background-color: #1679AB; /* Cambio de color al pasar el cursor */
 }
 
 .buttons {
@@ -393,29 +395,28 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #1679AB; /* Color de fondo al pasar el cursor */
+    background-color: #1679AB;
 }
 
-/* Estilos para los enlaces */
 p {
     text-align: center;
     margin-top: 20px;
 }
 
 p a {
-    color: #074173; /* Color del enlace */
+    color: #074173;
     text-decoration: none;
 }
 
 p a:hover {
     text-decoration: underline;
-    color: #1679AB; /* Color del enlace al pasar el cursor */
+    color: #1679AB;
 }
 
 .boton-cancelar{
     width: 100%;
-    background-color: #10439F; /* Color de fondo */
-    color: #ffffff; /* Color del texto */
+    background-color: #10439F;
+    color: #ffffff;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -426,17 +427,13 @@ p a:hover {
     background-color: #1679AB;
 }
 
-.boton-cerrar-sesion{
-    margin-left: 490px;
-    text-decoration: none;
-    color: #fff;
-    font-size: 12px;
-    font-family: "Lucida Console", "Courier New", monospace;
-    font-weight: bold;
-    transition: color 0.3s;
-    display: inline-block;
-    padding: 6px 12px;
-    background-color: #ff0000; /* Red background color, change as needed */
-    border: none;
-    border-radius: 2px;
+.logo-usta{
+  width: 80px;
+  margin-top: 0px;
+}
+
+.log-out{
+  width: 50px;
+  margin-top: 15px;
+  margin-left: 350px;
 }

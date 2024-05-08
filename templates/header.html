@@ -10,11 +10,14 @@
     <nav class="navbar">
         <div class="navbar-container">
             <ul class="nav-links">
+                <img src="static/img/usta_logo.jpg" alt="logo-usta" class="logo-usta">
                 <li><a href="{{url_for ('students')}}">Inicio</a></li>
                 <li><a href="{{url_for ('add_student')}}">Registrar estudiante</a></li>
                 <li><a href="{{ url_for ('doc_api')}}">Documentación API</a></li>
                 <li><a href="{{ url_for ('menu_principal')}}">Administración de usuarios</a></li>
-                <li ><a href="{{ url_for('cerrar_sesion') }}" class="boton-cerrar-sesion">Log out</a></li>
+                <a href= "{{ url_for('cerrar_sesion') }}">
+                  <img src="{{ url_for('static',filename='img/log-out.png') }}" alt="log-out" class="log-out">
+                </a>
             </ul>
         </div>
     </nav>
