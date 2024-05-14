@@ -1,7 +1,9 @@
 {% include "header.html" %}
     <div class="container">
-        <h2 class="nojoda">Bienvenido {{ username }}</h2>
-        <h3>Lista de Usuarios</h3>
+        <h2 class="nojoda">{{ username }}</h2>
+        <img src="{{ url_for('static',filename='img/user-logo.png') }}" class="user-logo"  alt="user-logo">
+        <br>
+        <br>
         <table>
             <thead>
                 <tr>

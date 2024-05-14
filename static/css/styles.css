@@ -5,10 +5,6 @@ body {
   background-color: #f2f2f2;
 }
 
-h1{
-text-align: center
-}
-
 .container {
   max-width: 800px;
   margin: 20px auto;
@@ -273,7 +269,8 @@ th {
 }
 
 .nojoda{
-    margin-left: 200px;
+    margin-left: 280px;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 
 .btn {
@@ -437,3 +434,9 @@ p a:hover {
   margin-top: 15px;
   margin-left: 350px;
 }
+
+.user-logo{
+    width: 50px;
+    margin-left: 380px;
+}
+
