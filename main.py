@@ -1,7 +1,6 @@
 from random import random
 from flask import Flask, render_template, redirect, url_for, jsonify, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_session import Session
 from flask_bootstrap import Bootstrap5
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String
@@ -10,7 +9,7 @@ from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import mysql.connector
 
-from wtforms import StringField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 app = Flask(__name__)
