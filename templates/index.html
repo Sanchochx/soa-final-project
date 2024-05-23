@@ -8,9 +8,8 @@
     <div class="container">
         {% for student in all_students %}
     <div class="student-list">
-<!--        <a href="{{ url_for('show_student', student_id=student.id) }}"> </a>-->
-      <div class="student">
-        <div class="student-info">
+      <div class="card">
+      <div class="card-content">
           <p><strong> Nombre del estudiante:</strong> {{ student.nombre_estudiante }}</p>
           <p><strong> Código del estudiante:</strong> {{ student.codigo_estudiante }}</p>
           <p><strong> Correo del estudiante:</strong> {{ student.correo_estudiante }}</p>
